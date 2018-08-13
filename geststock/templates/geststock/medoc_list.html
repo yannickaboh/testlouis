@@ -1,0 +1,74 @@
+{% extends 'geststock/base.html' %}
+
+{% load staticfiles %}
+
+{% block javascript %}
+  <script src="{% static 'geststock/js/medocs.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+        <div class="col-sm-3 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">Medicaments <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Fournisseurs</a></li>
+            <li><a href="#">Ordonnances</a></li>
+            <li><a href="#">Stock</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="">Commandes</a></li>
+            <li><a href="">PV</a></li>
+            <li><a href="">Depôt</a></li>
+            <li><a href="">Etagère</a></li>
+            <li><a href="">Inventaire</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="">Calendrier</a></li>
+            <li><a href="">Messages</a></li>
+            <li><a href="">Docummentation</a></li>
+          </ul>
+        </div>
+
+        <div class="col-sm-9">
+          <h1 class="page-header">Medicaments</h1>
+
+          <!-- BUTTON TO TRIGGER THE ACTION -->
+          <p>
+            <button type="button" class="btn btn-primary js-create-medoc" data-url="{% url 'geststock:medoc_create' %}">
+              <span class="glyphicon glyphicon-plus"></span>
+              Nouveau Medicament
+            </button>
+          </p>
+
+          <table class="table" id="medoc-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Genre</th>
+                <th>Famille</th>
+                <th>Libellé</th>
+                <th>Forme</th>
+                <th>Code</th>
+                <th>Conditionnement</th>
+                <th>Description</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% include 'geststock/partial/partial_medoc_list.html' %}
+            </tbody>
+          </table>
+
+          <!-- THE MODAL WE WILL BE USING -->
+          <div class="modal fade" id="modal-medoc">
+            <div class="modal-dialog">
+              <div class="modal-content">
+              </div>
+            </div>
+          </div>
+  
+</div>
+        
+  
+{% endblock %}
+

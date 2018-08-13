@@ -1,0 +1,28 @@
+{% for medoc in medocs %}
+  <tr>
+    <td>{{ medoc.id }}</td>
+    <td>{{ medoc.genre }}</td>
+    <td>{{ medoc.famille }}</td>
+    <td><a href="{% url 'geststock:medoc_update' medoc.id %}">{{ medoc.nom_generique }}</a></td>
+    <td>{{ medoc.forme }}</td>
+    <td>{{ medoc.code }}</td>
+    <td>{{ medoc.conditionnement }}</td>
+    <td>{{ medoc.description }}</td>
+    <td style="width: 150px">
+      <button type="button"
+              class="btn btn-warning btn-sm js-update-medoc"
+              data-url="{% url 'geststock:medoc_update' medoc.id %}">
+        <span class="glyphicon glyphicon-pencil"></span>
+      </button>
+      <button type="button"
+              class="btn btn-danger btn-sm js-delete-medoc"
+              data-url="{% url 'geststock:medoc_delete' medoc.id %}">
+        <span class="glyphicon glyphicon-trash"></span>
+      </button>
+    </td>
+  </tr>
+{% empty %}
+  <tr>
+    <td colspan="8" class="text-center bg-warning">No medoc</td>
+  </tr>
+{% endfor %}

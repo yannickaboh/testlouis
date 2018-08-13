@@ -1,0 +1,105 @@
+<script type="text/javascript">
+    var  tab = [];
+    document.addEventListener("DOMContentLoaded", function(event) { 
+        {% if t != 0  %}
+            {% for pharmacie in k %}
+                tab.push({
+                    lng: {{ pharmacie.longitude }},
+                    lat: {{ pharmacie.latitude }},
+                });
+            {% endfor %}
+        {% endif %}
+
+        map = new google.maps.Map(document.getElementById("map_canvas"), {
+        zoom: 6,
+        center: new google.maps.LatLng(0.390100, 9.454400),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+
+
+      });
+
+
+    for (var i = 0; i < tab.length; i++) {
+
+        {% for pharmacie in k %}
+        
+
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(tab[i].lat, tab[i].lng),
+            map: map
+        });
+
+        var contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="firstHeading" class="firstHeading">{{ pharmacie.nom }}</h1>'+
+            '<div id="bodyContent">'+
+            '<h5>Horaires: <a href="#">{{ pharmacie.horaires }}</a></h5>'+
+            '<h5>Site Web: <a href="#">{{ pharmacie.site_web }}</a></h5>'+
+            '<h5>Email: <a href="#">{{ pharmacie.email }}</a></h5>'+
+            '<h5>Téléphone: <a href="#">{{ pharmacie.telephone }}</a></h5>'+
+            '<p><a href="{% url 'geststock:disponible' %}">'+
+            'Disponibilite Medicament</a> '+
+            '(last visited June 22, 2009).</p>'+
+            '</div>'+
+            '</div>';
+
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+
+        {% endfor %}
+
+       
+  }
+
+        
+    });
+    
+  function initialize() {
+        var libreville = {lat: 0.390100, lng: 9.454400};
+        var map = new google.maps.Map(document.getElementById('map_canvas'), {
+          zoom: 10,
+          center: libreville
+        });
+
+        var contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+            '<div id="bodyContent">'+
+            '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+            'sandstone rock formation in the southern part of the '+
+            'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
+            'south west of the nearest large town, Alice Springs; 450&#160;km '+
+            '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
+            'features of the Uluru - Kata Tjuta National Park. Uluru is '+
+            'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
+            'Aboriginal people of the area. It has many springs, waterholes, '+
+            'rock caves and ancient paintings. Uluru is listed as a World '+
+            'Heritage Site.</p>'+
+            '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
+            'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+            '(last visited June 22, 2009).</p>'+
+            '</div>'+
+            '</div>';
+
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+
+        var marker = new google.maps.Marker({
+          position: libreville,
+          map: map,
+          title: 'Libreville'
+        });
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+      } 
+
+</script>

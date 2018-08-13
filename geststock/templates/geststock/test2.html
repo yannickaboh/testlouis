@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>GéoPharma+ | Blank</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- main css -->
+  <link rel="stylesheet" href="{% static 'geststock/dist/css/main.css' %}">
+  <!-- style css -->
+  <link rel="stylesheet" href="{% static 'geststock/dist/css/style.css' %}">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="{% static 'geststock/bootstrap/css/bootstrap.min.css' %}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'geststock/font-awesome/css/font-awesome.min.css' %}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="{% static 'geststock/ionicons/css/ionicons.min.css' %}">
+  <!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="{% static 'geststock/plugins/datepicker/datepicker3.css' %}">
+  <!-- Font family CSS -->
+  <link href='//fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <style type="text/css">
+        #head {
+            background: url({% static 'geststock/images/bg_header.jpg' %}) no-repeat;
+            min-height: 520px;
+            text-align: center;
+            padding-top: 30px;
+            color: #fff;
+            font-family: "Open sans",Helvetica,Arial,serif;
+            font-weight: 300;
+        }
+        .ui-autocomplete {
+            position: absolute;
+            z-index: 1000;
+            cursor: default;
+            padding: 0;
+            margin-top: 2px;
+            list-style: none;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .ui-autocomplete > li {
+            padding: 3px 20px;
+        }
+
+        .ui-autocomplete > li > .ui-state-active {
+            background-color: #DDD;
+            cursor: pointer;
+        }
+
+        .ui-helper-hidden-accessible {
+            display: none;
+        }
+
+        .btn-default {
+            color: #fff;
+            background-color: #0069b4;
+            border-color: #2d36e0;
+        }
+
+        .radio {
+            padding-left: 20px;
+            margin-top: -10px !important;
+        }
+
+        .container .col-md-4 table tr th {
+            text-align: center;
+            border: 5px;
+            z-index: 10;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: #666666;
+        }
+
+        .container {
+            text-align: justify;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        #pop {
+            display: none; /* On cache le pop up par defaut*/
+            position: absolute;
+            margin: auto;
+            z-index: 101;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            text-align: center; /* Permet de centrer le contenu au milieu de la fenetre.*/
+            background: #fff no-repeat center;
+            background-size: 90%; /*Propriété css3, tu peux aussi mettre une image de 1px png pour simuler la transparence.*/
+        }
+
+        .ajs-dimmer {
+            opacity: .9 !important;
+        }
+
+        .footer-btn {
+            position: absolute;
+            bottom: 0;
+            margin-left: -16px;
+            border-radius: 0;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+            border-width: 1px;
+        }
+
+        .btn-big-dep{
+            background-color:transparent;
+            font-weight:700;
+            border-radius:18px;
+            font-size:62px;padding:0;width:111px;
+            height:111px
+        }
+        .icon-blue{
+            border-color:#fff;
+            color:#fff
+        }
+        .icon-white{
+            border-color:#fff;
+            color:#fff
+        }
+        .btn-big-dep span{
+            display:block;
+            font-size:13px;
+            bottom:12px;
+            position:relative;
+            font-weight:400
+        }
+        .btn-big-dep.active,.btn-big-dep:active,.btn-big-dep:focus,.btn-big-dep:hover{
+            border-color:#47aa42;
+            color:#47aa42
+        }
+        .btn-big-dep {
+            background-color: transparent;
+            font-weight: 700;
+            border-radius: 18px;
+            font-size: 62px;
+            padding: 0;
+            width: 111px;
+            height: 111px;
+        }
+    
+    </style>
+</head>
+<body>
+
+  {% block head-javascript %}{% endblock %}
+    <!-- Content Wrapper. Contains page content -->
+    <nav class="navbar navbar-pills navbar-fixed-top" style="background-color: #4CAF50; border-color: #4CAF50;">
+        <div class="container">
+            <!-- Header -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.geopharmaplus.com" style="text-decoration: none; color: #fff; background-color: transparent; font-family: 'Satisfy', cursive; height: 60px; font-size: 30px">GéoPharma+</a>
+            </div>
+            <!-- Items -->
+            <div class="collapse navbar-collapse" id="topNavBar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="text-decoration: none; color: #fff; background-color: transparent; font-family: 'Satisfy', cursive; font-size: 20px">
+                                Accès sécurisé <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{% url 'geststock:login_user' %}" style="text-decoration: none; font-family: 'Satisfy', cursive; font-size: 20px">Usagers</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'geststock:login_user' %}" style="text-decoration: none; font-family: 'Satisfy', cursive; font-size: 20px">Pharmaciens</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'geststock:login_user' %}" style="text-decoration: none; font-family: 'Satisfy', cursive; font-size: 20px">MINSANTE</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'admin:login' %}" style="text-decoration: none; font-family: 'Satisfy', cursive; font-size: 20px">Administrateur</a>
+                                </li>
+                            </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+        </div>
+        <div class="container">
+                    </div>
+    </nav><br><br><br><br>
+    <div class="container">
+    <div class="col-md-8" style="z-index: 100;">
+        <p><a href="#">
+                <img class="logo" src="{% static 'geststock/images/logo2.png' %}" 
+                alt="Toutes les pharmacies du Gabon">
+            </a>
+        <h1 style="font-family: 'Satisfy', cursive; font-size: 30px;">Toutes les pharmacies ouvertes en journée et les pharmacies de garde du Gabon</h1>
+        <p>&nbsp;</p>
+    </div>
+
+    <div id="pop">
+        <div id="popupdlapp">
+            <p>&nbsp;</p>
+            <p style="color: #000;"></p>
+            <p style="color: #000;"></p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>
+                <a href="#" alt="Télécharger GéoPharma+ sur l'AppStore" style="width:120px;height:41px;"/></a>
+                <a href="#">
+                    <img src="{% static 'geststock/images/google_store.png' %}" alt="Télécharger GéoPharma+ sur GooglePlay" style="width:120px;height:41px;"/>
+                </a><br><br>
+                <a href="#" onclick="fermer()" style="font-family: 'Satisfy', cursive;">Continuer sur le site mobile</a>
+            </p>
+            <p>&nbsp;</p>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+            <p style="text-align:right">&nbsp;</p>
+            <table style="text-align:center; border:none; width:245px;">
+                <tr>
+                    <th colspan="2" scope="row" style="font-family: 'Satisfy', cursive; font-size: 20px;">Télécharger gratuitement l'application GéoPharma+</th>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <a href="#">
+                            <img src="{% static 'geststock/images/app_store.png' %}"
+                                 alt="Télécharger GéoPharma+ sur l'AppStore"
+                                 style="width:120px; height:41px;"/>
+                        </a>
+                    </th>
+                    <td>
+                        <a href="#">
+                            <img src="{% static 'geststock/images/google_store.png' %}"
+                                 alt="Télécharger GéoPharma+ sur GooglePlay"
+                                 style="width:120px; height:41px;"/>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="2" scope="row"><br/>
+                        <p style="font-family: 'Satisfy', cursive; font-size: 20px;">Intégrer sur votre site
+                            <a href="#">
+                                <img src="{% static 'geststock/images/widget.jpg' %}"
+                                     style="width:120px; height:41px;"
+                                     alt="Widgets GéoPharma+" style="font-family: 'Satisfy', cursive; " />
+                            </a>
+                        </p>
+                    </th>
+                </tr>
+            </table>
+            <br/>
+        </div>
+    </div>
+</div><br><br>
+
+<div id="head">
+        <div class="container">
+            <h2 style="text-align:center; padding-bottom: 30px; font-family: 'Satisfy', cursive; font-size: 30px; color: #fff" class="lead">24H/24, 7J/7, trouver facilement <br>
+                la pharmacie la plus proche.</h2>
+            <div class="container">
+                <form role="search" method="get" action="{% url 'geststock:index' %}" class="form-horizontal row">
+                
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <div class="input-group-addon pointer">
+                            <i class="fa fa-location-arrow"></i>
+                        </div>
+                        <input class="form-control" required autofocus placeholder="Saisir le nom du médicament svp..." style="font-family: 'Satisfy', cursive; height: 50px; font-size: 25px;" name="q" value="{{ request.GET.q }}">
+                    </div>
+
+                    <br>
+
+                    <!--div class="row">
+                        <div class="col-xs-8">
+                            <div class="input-group col-md-5">
+                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                <input class="form-control datepicker" style="padding: 4px; color:#000; font-family: 'Satisfy', cursive; font-size: 20px;" id="date_garde" required placeholder="JJ/MM/AAAA" name="search_date" type="text" value="20/08/2017">
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="radio">
+                                <input id="ty_jour" checked="checked" name="type_garde" type="radio" value="1">
+                                <label for="ty_jour" style="color:#fff; font-family: 'Satisfy', cursive; font-size: 20px;">Jour</label>
+                                <br>
+                                <input id="ty_nuit" name="type_garde" type="radio" value="2">
+                                <label for="ty_nuit" style="color:#fff; font-family: 'Satisfy', cursive; font-size: 20px;">Nuit</label>
+                            </div>
+                        </div>
+                    </div-->
+
+                    <br>
+                    <input type="submit" class="btn btn-primary btn-block" value="Rechercher un Médicament" style="font-family: 'Satisfy', cursive; font-size: 20px;">
+                </div>
+                </form>
+
+                <br><br>
+
+                            <div class="row">
+                                    <div class="col-md-6" id="bandeau_gauche"
+                                         style="color: #000;  max-height: 500px; overflow: auto; margin: 0; padding-right: 0;">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr style="font-family: 'Satisfy', cursive; font-size: 20px;">
+                                                            <th>#</th>
+                                                              <th>Libellé</th>
+                                                              <th>Forme</th>
+                                                              <th>Code</th>
+                                                              <th>Description</th>
+                                                            </tr>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody style="font-family: 'Satisfy', cursive; font-size: 20px;">
+                                                        {% for medicament in medicaments %}
+                                                          <tr>
+                                                            <td>{{ medicament.id }}</td>
+                                                            <td><a href="#">{{ medicament.nom_generique }}</a></td>
+                                                            <td>{{ medicament.forme }}</td>
+                                                            <td>{{ medicament.code }}</td>
+                                                            <td>{{ medicament.description }}</td>
+                                                            <td>
+                                                          </tr>
+                                                       {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                        <div class="col-md-6" id="bandeau_droite">
+                            <div class="center img-polaroid" style="overflow: hidden;">
+                                <div id="map_canvas" style="width:100%; height:500px;"></div>
+                            </div>
+                        </div>
+                        
+                    </div><br><br>
+
+                    
+                            </div>
+        </div><br><br>
+
+
+        <div class="container">
+            <br> <br>
+            <h2 style="font-family: 'Satisfy', cursive; font-size: 30px;">A propos</h2>
+            <p>&nbsp;</p>
+            <p class="text-muted" style="font-family: 'Satisfy', cursive; font-size: 20px;">
+                <strong><u><a href="#">GéoPharma+</a></u></strong> est une application mobile doublée d’un site web (www.geopharmaplus.com)
+                qui fournit l’information officielle sur <strong>les pharmacies ouvertes</strong> au Gabon,
+                notamment les <strong>pharmacies de garde</strong> les dimanches, les jours fériés et la nuit.
+            <br><br>
+            Avec le site internet Géopharma+, vous pouvez rechercher une <strong><u><a href="#">pharmacie ouverte</a></u></strong> en semaine et
+                <strong><u><a href="#">les pharmacies de garde</a></u></strong> le dimanche et les jours fériés autour de la localisation souhaitée.
+                Vous identifiez ainsi la pharmacie ouverte en journée ou de garde la plus proche de vous et trouvez
+                facilement le
+                meilleur itinéraire pour vous y rendre.
+            <br><br>
+            A <strong><u><a href="#">Libreville</a></u></strong>, la nuit,<strong> les pharmacies de garde </strong>sont ouvertes et directement accessibles. Partout
+                ailleurs, les coordonnées de la pharmacie de garde de nuit vous seront communiquées par les services de
+                police ou de gendarmerie de proximité.<br><br>
+            <strong>Géopharma+ <a href="#">www.geopharmaplus.com</a> </strong>est le fruit d&rsquo;une collaboration entre Le Ministère de la Santé, Les experts du domaine de la Santé et l&rsquo;Agence Universitaire de la Francophonie.Le site internet www.geopharmaplus.com et l&rsquo;application reflètent leur engagement et celui des syndicats de pharmaciens à garantir une information fiable et accessible à tous les citoyens sur la permanence des <strong><u><a href="#">les pharmacies ouvertes</a></u></strong> et en particulier
+                <strong><u><a href="#">les pharmacies de garde</a></u></strong>.
+            </p><br>
+            <p>&nbsp;</p>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 widget">
+                        <div class="widget-body">
+                            <p style="text-align:center;" class="simplenav">
+                                <a href="#" target="new">
+                                    <img src="{% static 'geststock/images/minsante.png' %}"
+                                         alt="Ministère de la Santé" style="height: 280px;">
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 widget">
+                        <div class="widget-body">
+                            <p style="text-align:center;">
+                                <a href="#" target="new">
+                                    <img src="{% static 'geststock/images/gab.png' %}" alt="Géopharma+"
+                                         class="text-center"
+                                         style="text-align:center;">
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span class="text-muted"></span>
+        </div>
+
+        <div id="footer" class="top-space">
+            <div class="footer1" style="background-color: #0069b4;">
+                <div class="container">
+                    <div class="row">
+                        <div class>
+                            <h2 style="color: #fff; text-align: left; font-family: 'Satisfy', cursive; font-size: 40px;"> Zone de couverture</h2>
+                            <p style="color: #fff; font-family: 'Satisfy', cursive; font-size: 20px;">Nous sommes déployer dans les villes suivantes:</p>
+                            <div class="col-md-1 col-sm-3 highlight">
+                                <div class="h-caption">
+                                    <h4>
+                                        <a href="pharmacie-de-garde-val-d-oise-95.html"
+                                           class="btn btn-big-dep icon-blue btn-lg depnum-big">
+                                            1<span>Makokou</span>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div class="h-body text-center"></div>
+                            </div>
+                            <div class="col-md-1 col-sm-3 highlight">
+                                <div class="h-caption">
+                                    <h4>
+                                        <a href="pharmacie-de-garde-val-d-oise-95.html"
+                                           class="btn btn-big-dep icon-blue btn-lg depnum-big">
+                                            2<span>Oyem</span>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div class="h-body text-center"></div>
+                            </div>
+                            <div class="col-md-1 col-sm-3 highlight">
+                                <div class="h-caption">
+                                    <h4>
+                                        <a href="pharmacie-de-garde-paris-75.html"
+                                           class="btn btn-big-dep icon-blue btn-lg depnum-big">
+                                            3<span>FranceVille</span>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div class="h-body text-center"></div>
+                            </div>
+                            <div class="col-md-1 col-sm-4 highlight">
+                                <div class="h-caption">
+                                    <h4>
+                                        <a href="pharmacie-de-garde-seine-et-marne-77.html"
+                                           class="btn btn-big-dep icon-blue btn-lg depnum-big">
+                                            4<span>LibreVille</span>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div class="h-body text-center"></div>
+                            </div>
+                            <div class="col-md-1 col-sm-4 highlight">
+                                <div class="h-caption">
+                                    <h4>
+                                        <a href="pharmacie-de-garde-yvelines-78.html"
+                                           class="btn btn-big-dep icon-blue btn-lg depnum-big">
+                                            5<span>Port-Gentil</span>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div class="h-body text-center"></div>
+                            </div>
+                            <div class="col-md-1 col-sm-4 highlight">
+                                <div class="h-caption">
+                                    <h4>
+                                        <a href="pharmacie-de-garde-essonne-91.html"
+                                           class="btn btn-big-dep icon-blue btn-lg depnum-big">
+                                            6<span>Mouilla</span>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div class="h-body text-center"></div>
+                            </div>
+                            <div class="col-md-1 col-sm-4 highlight">
+                                <div class="h-caption">
+                                    <h4>
+                                        <a href="pharmacie-de-garde-hauts-de-seine-92.html"
+                                           class="btn btn-big-dep icon-blue btn-lg depnum-big">
+                                            7<span>Lambaréné</span>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div class="h-body text-center"></div>
+                            </div>
+                            <div class="col-md-1 col-sm-4 highlight">
+                                <div class="h-caption">
+                                    <h4>
+                                        <a href="pharmacie-de-garde-seine-saint-denis-93.html"
+                                           class="btn btn-big-dep icon-blue btn-lg depnum-big">
+                                            8<span>Tchibanga</span>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div class="h-body text-center"></div>
+                            </div>
+                            <!--div class="col-md-1 col-sm-4 highlight">
+                                <div class="h-caption">
+                                    <h4>
+                                        <a href="pharmacie-de-garde-val-de-marne-94.html"
+                                           class="btn btn-big-dep icon-blue btn-lg depnum-big">
+                                            9<span>Koulamoutou</span>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div class="h-body text-center"></div>
+                            </div-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer" style="height: 45px;">
+            <div class="container"><br>
+                <div class="row">
+                    <div class="col-md-6 widget">
+                        <div class="widget-body">
+                            <p class="simplenav">
+                                <a href="mentions-legales.html" style="color: #4CAF50; text-align: left; font-family: 'Satisfy', cursive; font-size: 25px;">Mentions légales</a> -
+                                <a href="contact.html" style="color: #4CAF50; text-align: left; font-family: 'Satisfy', cursive; font-size: 25px;">Contact</a> -
+                                <a href="kitdecom.html" style="color: #4CAF50; text-align: left; font-family: 'Satisfy', cursive; font-size: 25px;">Kit de communication</a> -
+                                <a href="faq.html" style="color: #4CAF50; text-align: left; font-family: 'Satisfy', cursive; font-size: 25px;">FAQ</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 widget">
+                        <div class="widget-body">
+                            <p class="text-right" style="color: #4CAF50; text-align: left; font-family: 'Satisfy', cursive; font-size: 25px;">
+                                Copyright &copy; 2017, Géopharma+, <a href="http://www.asseci.com" style="color: #4CAF50; text-align: left; font-family: 'Satisfy', cursive; font-size: 25px;">H14 - ASSECI</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<!-- jQuery 2.2.3 -->
+<script src="{% static 'geststock/plugins/jQuery/jquery-2.2.3.min.js' %}"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="{% static 'geststock/bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- bootstrap datepicker -->
+<script src="{% static 'geststock/plugins/datepicker/bootstrap-datepicker.js' %}"></script>
+<!-- google map api -->
+<script src="https://maps.googleapis.com/maps/api/js?q=Libreville&key=AIzaSyDvBRw5JjebNnwQW6doJSbSJgAgpdgjs2M"></script>
+<!-- google map api gps activation -->
+<!-- Page script -->
+<!-- Page script -->
+<script type="text/javascript">
+    var  tab = [];
+    document.addEventListener("DOMContentLoaded", function(event) { 
+        {% if m != 0  %}
+            {% for pharmacie in medicament_results %}
+                tab.push({
+                    lng: {{ pharmacie.longitude }},
+                    lat: {{ pharmacie.latitude }},
+                });
+            {% endfor %}
+        {% endif %}
+
+        map = new google.maps.Map(document.getElementById("map_canvas"), {
+        zoom: 6,
+        center: new google.maps.LatLng(0.390100, 9.454400),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+
+
+      });
+
+    for (var i = 0; i < tab.length; i++) {
+       var pos = new google.maps.LatLng(tab[i].lat, tab[i].lng);
+       marker = new google.maps.Marker({
+            position: new google.maps.LatLng(tab[i].lat, tab[i].lng),
+            //position: {lat:tab2[i].lat,lng:tab2[i].lng},
+            map: map
+        })
+
+       
+  }
+
+        
+    });
+    
+  function initialize() {
+    map = new google.maps.Map(document.getElementById("map_canvas"), {
+        zoom: 10,
+        center: new google.maps.LatLng(0.390100, 9.454400),
+        title: '{{ pharmacie.nom }}',
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+      });
+
+    var contentString = '<div id="content">{{ pharmacie.nom }}<br></div>';
+
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+
+    
+
+    for (var i = 0; i <= tab.length; i++) {
+       //  var pos = new google.maps.LatLng(tab[i].lat, tab[i].lng);
+       /* marker = new google.maps.Marker({
+            //position: new google.maps.LatLng(tab[i].lat, tab[i].lng),
+            position: {lat:tab[i].lat,lng:tab[i].lng},
+            map: map
+        })*/
+
+        console.log(tab[i]['lat'])
+  }
+
+
+} 
+
+</script>
+<script type="text/javascript">
+  //Date picker
+    $('#datepicker').datepicker({
+      autoclose: true
+    });
+</script>
+</body>
+</html>
+
+
+// Try HTML5 geolocation.
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(function(position) {
+                var pos = {
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude
+                };
+
+                // Ajout marqeur
+                /*marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(pos),
+                    map: map
+                });*/
+
+                var content = '<div id="content">'+
+                '<div id="bodyContent">'+
+                '<h5><a href="#">Ma position actuelle</a></h5>'+
+                '</div>';
+
+                // Ajout contenu Pop-up
+                google.maps.event.addListener(/*marker,*/ 'click', (function (/*marker,*/ pos, content) {
+                    return function() {
+                        infoWindow.setPosition(pos);
+                        infoWindow.setContent(content);
+                        infoWindow.open(map);
+                        map.setCenter(pos);
+                    }
+                })(/*marker,*/ pos, content));
+
+                
+              }, function() {
+                handleLocationError(true, infoWindow, map.getCenter());
+              });
+            } else {
+              // Browser doesn't support Geolocation
+              handleLocationError(false, infoWindow, map.getCenter());
+            }

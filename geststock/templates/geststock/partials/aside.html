@@ -1,0 +1,150 @@
+{% load staticfiles %}
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar user panel -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="{% static 'geststock/dist/img/user2-160x160.jpg' %}" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p>{{ user.username }}</p>
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+      </div>
+      <!-- search form -->
+      <form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+        </div>
+      </form>
+      <!-- /.search form -->
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu">
+        <li class="header">MAIN NAVIGATION</li>
+        <li class="active treeview">
+          <a href="{% url 'geststock:accueil' %}">
+            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-folder"></i> <span>Médicaments</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li>
+              <a href="{% url 'geststock:list_mat' %}">
+                <i class="fa fa-circle-o"></i> <span>Matériel Médical</span>
+                <span class="pull-right-container">
+                  <small class="label pull-right bg-red">{{ medicamentss }}</small>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'geststock:list_medoc' %}">
+                <i class="fa fa-circle-o"></i> <span>Médicament</span>
+                <span class="pull-right-container">
+                  <small class="label pull-right bg-yellow">{{ medicaments }}</small>
+                </span>
+              </a>
+            </li>
+            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Dépôt</a></li>
+            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Etagère</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="{% url 'geststock:fournisseur_list' %}">
+            <i class="fa fa-th"></i> <span>Fournisseurs</span>
+            <span class="pull-right-container">
+              <span class="label label-primary pull-right">{{ fournisseurs }}</span>
+            </span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-pie-chart"></i>
+            <span>Stock</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Inventaire</a></li>
+            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Fiche de stock</a></li>
+            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Procès Verbal</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-laptop"></i>
+            <span>Commandes</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Matériel Médical</a></li>
+            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Médicaments</a></li>
+            <li><a href="{% url 'geststock:ordonnance_list' %}"><i class="fa fa-circle-o"></i> Ordonnances</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-folder"></i> <span>Compte & Messagerie</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li>
+              <a href="pages/calendar.html">
+                <i class="fa fa-calendar"></i> <span>Calendar</span>
+                <span class="pull-right-container">
+                  <small class="label pull-right bg-red">3</small>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="pages/mailbox/mailbox.html">
+                <i class="fa fa-envelope"></i> <span>Mailbox</span>
+                <span class="pull-right-container">
+                  <small class="label pull-right bg-yellow">12</small>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="pages/mailbox/mailbox.html">
+                <i class="fa fa-envelope"></i> <span>Messages</span>
+                <span class="pull-right-container">
+                  <small class="label pull-right bg-red">{{ messages }}</small>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-users"></i>
+            <span>Personnel</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="pages/tables/simple.html"><i class="fa fa-user"></i> Employés</a></li>
+            <li><a href="pages/tables/simple.html"><i class="fa fa-user"></i> Salaires</a></li>
+            <li><a href="pages/tables/simple.html"><i class="fa fa-user"></i> Congés</a></li>
+          </ul>
+        </li>
+        <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
