@@ -25,7 +25,7 @@ SECRET_KEY = '-a(0k)_dahkjtvdha21ugso!#)_a4v=lk&=#sx!6eccwc@d7yi'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'baylonecorporation.pythonanywhere.com']
+ALLOWED_HOSTS = ['yannickabohaboh.pythonanywhere.com']
 
 # Google MAP API KEY
 GOOGLE_MAPS_API_KEY = 'AIzaSyDvBRw5JjebNnwQW6doJSbSJgAgpdgjs2M'
@@ -45,16 +45,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
 
-    'rest_framework',
+    #'rest_framework',
     
-    'bootstrap3',
-    'crispy_forms',
+    #'bootstrap3',
+    #'crispy_forms',
     #'django_countries',
-    'django_filters',
+    #'django_filters',
 
 
 
-    'widget_tweaks',
+    #'widget_tweaks',
 
     #'accounts',
     #'corsheaders',
@@ -77,7 +77,7 @@ INSTALLED_APPS = [
     'geststock.apps.GeststockConfig',
 ]
 
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
+#CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -111,39 +111,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'plateforme.wsgi.application'
 
 
-REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    'DEFAULT_RENDERER_CLASSES':
-        (
-        'rest_framework.renderers.JSONRenderer',
-        'rest_framework.renderers.BrowsableAPIRenderer'
-    ),
-    'DEFAULT_AUTHENTICATION_CLASSES':[],
-                     #(
-        #'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-       # 'rest_framework.authentication.BasicAuthentication',
-       # 'rest_framework.authentication.SessionAuthentication',
-       # 'rest_framework.authentication.TokenAuthentication',
-    #),
-    'DEFAULT_PERMISSION_CLASSES':[],
-                     #(
-    #'rest_framework.permissions.AllowAny',
-    #'rest_framework.permissions.IsAuthenticated',
-     #),
-        #(
-        #'rest_framework.permissions.IsAuthenticated',
-       # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    #),
-    #'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),
-    #'PAGE_SIZE': 100,
 
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'DEFAULT_PARSER_CLASSES': (
-        'rest_framework.parsers.JSONParser',
-    ),
-
-}
 
 
 # Database
